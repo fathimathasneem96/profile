@@ -1,0 +1,39 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Profile</title>
+</head>
+<body>
+        <h1>User Profile</h1>
+        <nav>
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="/profile/update">Update Profile</a></li>
+                <li><a href="/logout">Logout</a></li>
+            </ul>
+        </nav>
+        <h2>Welcome, {{ user.username }}</h2>
+        <div>
+            <h3>Profile Information</h3>
+            <p>Email: {{ user.email }}</p>
+            <p>Bio: {{ user.profile.bio }}</p>
+            <img src="{{ user.profile.profile_picture.url }}" alt="Profile Picture">
+        </div>
+        <div>
+            <h3>Update Profile</h3>
+            <form method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                <label for="bio">Bio:</label><br>
+                <textarea id="bio" name="bio">{{ user.profile.bio }}</textarea><br>
+                <label for="phone_number">Phone Number:</label><br>
+                <textarea id="phone_number" name="phone_number">{{ user.profile.phone_number }}</textarea><br>
+                <label for="profile_picture">Profile Picture:</label><br>
+                <input type="file" id="profile_picture" name="profile_picture"><br>
+                <button type="submit">Update</button>
+            </form>
+        </div>
+
+    <script src="{% static 'js/script.js' %}"></script>
+</body>
+</html>
